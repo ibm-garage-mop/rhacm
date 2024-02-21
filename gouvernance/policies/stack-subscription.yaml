@@ -1,0 +1,84 @@
+apiVersion: policy.open-cluster-management.io/v1
+kind: Policy
+metadata:
+  annotations:
+    apps.open-cluster-management.io/cluster-admin: "true"
+    apps.open-cluster-management.io/reconcile-option: merge
+    policy.open-cluster-management.io/categories: CM Configuration Management
+    policy.open-cluster-management.io/controls: CM-2 Baseline Configuration
+    policy.open-cluster-management.io/standards: Config
+  labels:
+  name: stack-subscription
+  namespace: rhacm-policies
+spec:
+  disabled: false
+  policy-templates:
+    - objectDefinition:
+        apiVersion: policy.open-cluster-management.io/v1
+        kind: ConfigurationPolicy
+        metadata:
+          name: stack-subscription
+        spec:
+          object-templates-raw: |
+            {{- range (lookup "cluster.open-cluster-management.io/v1" "ManagedCluster" "default" "").items }}
+              {{- if index .metadata.labels "stack" }}
+              {{ $managedCluster := .metadata.name }}
+            - complianceType: musthave
+              objectDefinition:
+                apiVersion: app.k8s.io/v1beta1
+                kind: Application
+                metadata:
+                  name: {{ $managedCluster }}-stack-{{ .metadata.labels.stack }}
+                  namespace: rhacm-policies
+                spec:
+                  componentKinds:
+                    - group: apps.open-cluster-management.io
+                      kind: Subscription
+                  descriptor: {}
+                  selector:
+                    matchExpressions:
+                      - key: app
+                        operator: In
+                        values:
+                          - {{ $managedCluster }}-stack-{{ .metadata.labels.stack }}
+            - complianceType: musthave
+              objectDefinition:
+                apiVersion: apps.open-cluster-management.io/v1
+                kind: Subscription
+                metadata:
+                  name: {{ $managedCluster }}-stack-{{ .metadata.labels.stack }}
+                  namespace: rhacm-policies
+                  annotations:
+                    apps.open-cluster-management.io/git-branch: main
+                    apps.open-cluster-management.io/git-path: applications/{{ .metadata.labels.stack }}-stack/{{ $managedCluster }}
+                    apps.open-cluster-management.io/reconcile-option: merge
+                spec:
+                  channel: ggithubcom-ibm-garage-mop-rhacm-ns/ggithubcom-ibm-garage-mop-rhacm
+                  placement:
+                    placementRef:
+                      name: {{ $managedCluster }}
+                      kind: Placement
+            - complianceType: musthave
+              objectDefinition:
+                apiVersion: cluster.open-cluster-management.io/v1beta1
+                kind: Placement
+                metadata:
+                  name: {{ $managedCluster }}
+                  namespace: rhacm-policies
+                spec:
+                  clusterSets:
+                  - global
+                  predicates:
+                  - requiredClusterSelector:
+                      labelSelector:
+                        matchExpressions:
+                        - key: name
+                          operator: In
+                          values:
+                          - {{ $managedCluster }}
+              {{- end }}
+            {{- end }}
+          pruneObjectBehavior: None
+          remediationAction: inform
+          severity: low
+  remediationAction: enforce

@@ -1,0 +1,23 @@
+apiVersion: policy.open-cluster-management.io/v1beta1
+kind: PolicySet
+metadata:
+  annotations:
+    apps.open-cluster-management.io/cluster-admin: "true"
+    apps.open-cluster-management.io/hosting-subscription: rhacm-policies/policies-subscription-1-local
+    apps.open-cluster-management.io/reconcile-option: merge
+  labels:
+    app: policies
+    app.kubernetes.io/part-of: policies
+    apps.open-cluster-management.io/reconcile-rate: medium
+  name: telco
+  namespace: rhacm-policies
+spec:
+  description: ""
+  policies:
+   # - metallb-operator
+   # - metallb-cfg-l2adv
+    - sriov-operator
+    - sriov-cfg-default
+    - nmstate-operator
+    - nmstate-cfg-default
+    - copy-config
