@@ -5,7 +5,7 @@ metadata:
     policy.open-cluster-management.io/categories: CM Configuration Management
     policy.open-cluster-management.io/controls: CM-2 Baseline Configuration
     policy.open-cluster-management.io/standards: Network
-  name: nmstate-cfg
+  name: nmstate-cfg-v1
   namespace: rhacm-policies
 spec:
   dependencies:
