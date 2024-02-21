@@ -14,10 +14,10 @@ metadata:
 spec:
   description: ""
   policies:
-    - metallb-operator
+   # - metallb-operator
+   # - metallb-cfg-l2adv
     - sriov-operator
     - sriov-cfg-default
     - nmstate-operator
     - nmstate-cfg-default
     - copy-config
-    - metallb-cfg-l2adv
