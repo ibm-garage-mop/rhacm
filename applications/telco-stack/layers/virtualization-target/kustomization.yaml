@@ -5,5 +5,6 @@ kind: Kustomization
 #- ../../base
 
 resources:
+- metallb-operator.yaml
 - metallb-l2adv.yaml
 - metallb-ipapool.yaml
