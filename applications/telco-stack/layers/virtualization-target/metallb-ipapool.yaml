@@ -5,4 +5,4 @@ metadata:
   namespace: metallb
 spec:
   addresses:
-    - 172.19.0.160-172.19.0.169
+    - 172.19.0.160-172.19.0.167
