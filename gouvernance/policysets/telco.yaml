@@ -1,0 +1,15 @@
+apiVersion: policy.open-cluster-management.io/v1beta1
+kind: PolicySet
+metadata:
+  name: telco
+  namespace: rhacm-policies
+spec:
+  description: ""
+  policies:
+    - metallb-operator
+    - sriov-operator
+    - sriov-cfg-default
+    - nmstate-operator
+    - nmstate-cfg-default
+    - copy-config
+    - metallb-cfg-l2adv
