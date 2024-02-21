@@ -1,0 +1,17 @@
+apiVersion: nmstate.io/v1beta1
+kind: NodeNetworkConfigurationPolicy
+metadata:
+  generation: 1
+  name: vlan-481-ens2f1
+spec:
+  desiredState:
+    interfaces:
+      - description: VLAN using ens2f1
+        name: ens2f1.481
+        state: up
+        type: vlan
+        vlan:
+          base-iface: ens2f1
+          id: 481
+  nodeSelector:
+    node-role.kubernetes.io/master: ''
