@@ -2,9 +2,16 @@ apiVersion: policy.open-cluster-management.io/v1
 kind: Policy
 metadata:
   annotations:
+    apps.open-cluster-management.io/cluster-admin: "true"
+    apps.open-cluster-management.io/hosting-subscription: rhacm-policies/policies-subscription-1-local
+    apps.open-cluster-management.io/reconcile-option: merge
     policy.open-cluster-management.io/categories: CM Configuration Management
     policy.open-cluster-management.io/controls: CM-2 Baseline Configuration
     policy.open-cluster-management.io/standards: Config
+  labels:
+    app: policies
+    app.kubernetes.io/part-of: policies
+    apps.open-cluster-management.io/reconcile-rate: medium
   name: copy-config
   namespace: rhacm-policies
 spec:
