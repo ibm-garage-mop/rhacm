@@ -5,19 +5,9 @@ metadata:
     apps.open-cluster-management.io/cluster-admin: "true"
     apps.open-cluster-management.io/hosting-subscription: rhacm-policies/policies-subscription-1-local
     apps.open-cluster-management.io/reconcile-option: merge
-  labels:
-    app: policies
-    app.kubernetes.io/part-of: policies
-    apps.open-cluster-management.io/reconcile-rate: medium
-  name: telco
+  name: stack-subscription
   namespace: rhacm-policies
 spec:
   description: ""
   policies:
-   # - metallb-operator
-   # - metallb-cfg-l2adv
-    - sriov-operator
-    - sriov-cfg-default
-    - nmstate-operator
-    - nmstate-cfg-default
-    - copy-config
+    - stack-subscription
