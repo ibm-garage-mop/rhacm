@@ -20,21 +20,20 @@ spec:
         apiVersion: policy.open-cluster-management.io/v1
         kind: ConfigurationPolicy
         metadata:
-          name: nmstate-cfg
+          name: nmstate-cfg-nncp
         spec:
           namespaceSelector:
             exclude:
               - kube-*
             include:
               - default
-          object-templates:
+          object-templates-raw: |
             - complianceType: musthave
               objectDefinition:
-                apiVersion: v1
-                kind: Namespace
-                metadata:
-                  name: test-sophie2
+                {{hub fromConfigMap "rhacm-policies" "nmstate-nncp" .ManagedClusterName | autoindent hub}}
           pruneObjectBehavior: None
           remediationAction: inform
           severity: low
   remediationAction: enforce
+
+
