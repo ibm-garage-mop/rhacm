@@ -91,9 +91,11 @@ spec:
                 spec:
                   packageOverrides:
                     - packageName: nmstate
+                      packageAlias: nmstate
                       packageOverrides:
-                      - path: metadata.namespace
-                        value: {}
+                      - path: metadata
+                        value:
+                            namespace: {}
                   channel: {{ $namespace }}/githubcom-ibm-garage-mop-rhacm
                   placement:
                     placementRef:
