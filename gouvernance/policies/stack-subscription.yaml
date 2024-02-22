@@ -91,7 +91,6 @@ spec:
                 spec:
                   packageOverrides:
                     - packageName: nmstate
-                      packageAlias: nmstate
                       packageOverrides:
                       - path: metadata
                         value:
