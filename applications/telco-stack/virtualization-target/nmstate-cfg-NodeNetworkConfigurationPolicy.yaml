@@ -1,7 +1,6 @@
 apiVersion: nmstate.io/v1beta1
 kind: NodeNetworkConfigurationPolicy
 metadata:
-  generation: 1
   name: vlan-481-ens2f1
 spec:
   desiredState:
@@ -14,4 +13,4 @@ spec:
           base-iface: ens2f1
           id: 483
   nodeSelector:
-    node-role.kubernetes.io/master: ''
+    node-role.kubernetes.io/worker: ''
