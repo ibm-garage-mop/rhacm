@@ -31,6 +31,9 @@ spec:
                 metadata:
                   name: {{ $managedCluster }}-stack-{{ .metadata.labels.stack }}
                   namespace: {{ $namespace }}
+                  annotations:
+                    open-cluster-management.io/user-group: b2NwLWFkbWlucyxzeXN0ZW06YXV0aGVudGljYXRlZDpvYXV0aCxzeXN0ZW06YXV0aGVudGljYXRlZA==
+                    open-cluster-management.io/user-identity: c2NoYWJyb2xsZXM=
                 spec:
                   componentKinds:
                     - group: apps.open-cluster-management.io
@@ -83,6 +86,8 @@ spec:
                     apps.open-cluster-management.io/git-branch: main
                     apps.open-cluster-management.io/git-path: applications/{{ .metadata.labels.stack }}-stack/{{ $managedCluster }}
                     apps.open-cluster-management.io/reconcile-option: merge
+                    open-cluster-management.io/user-group: b2NwLWFkbWlucyxzeXN0ZW06YXV0aGVudGljYXRlZDpvYXV0aCxzeXN0ZW06YXV0aGVudGljYXRlZA==
+                    open-cluster-management.io/user-identity: c2NoYWJyb2xsZXM=
                 spec:
                   channel: {{ $namespace }}/githubcom-ibm-garage-mop-rhacm
                   placement:
