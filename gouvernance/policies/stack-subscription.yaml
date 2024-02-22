@@ -50,7 +50,7 @@ spec:
                   namespace: rhacm-policies
                   annotations:
                     apps.open-cluster-management.io/git-branch: main
-                    apps.open-cluster-management.io/git-path: applications/{{ .metadata.labels.stack }}-stack/layers/{{ $managedCluster }}
+                    apps.open-cluster-management.io/git-path: applications/{{ .metadata.labels.stack }}-stack/{{ $managedCluster }}
                     apps.open-cluster-management.io/reconcile-option: merge
                 spec:
                   channel: ggithubcom-ibm-garage-mop-rhacm-ns/ggithubcom-ibm-garage-mop-rhacm
