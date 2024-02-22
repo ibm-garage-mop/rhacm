@@ -45,20 +45,15 @@ spec:
             - complianceType: musthave
               objectDefinition:
                 apiVersion: apps.open-cluster-management.io/v1
-                kind: Subscription
+                kind: Channel
                 metadata:
-                  name: {{ $managedCluster }}-stack-{{ .metadata.labels.stack }}
-                  namespace: {{ $namespace }}
                   annotations:
-                    apps.open-cluster-management.io/git-branch: main
-                    apps.open-cluster-management.io/git-path: applications/{{ .metadata.labels.stack }}-stack/{{ $managedCluster }}
-                    apps.open-cluster-management.io/reconcile-option: merge
+                    apps.open-cluster-management.io/reconcile-rate: medium
+                  name: githubcom-ibm-garage-mop-rhacm
+                  namespace: {{ $namespace }}
                 spec:
-                  channel: {{ $namespace }}/githubcom-ibm-garage-mop-rhacm
-                  placement:
-                    placementRef:
-                      name: {{ $managedCluster }}
-                      kind: Placement
+                  pathname: https://github.com/ibm-garage-mop/rhacm.git
+                  type: Git
             - complianceType: musthave
               objectDefinition:
                 apiVersion: cluster.open-cluster-management.io/v1beta1
@@ -77,18 +72,23 @@ spec:
                           operator: In
                           values:
                           - {{ $managedCluster }}
-              - complianceType: musthave
-                objectDefinition:
-                  apiVersion: apps.open-cluster-management.io/v1
-                  kind: Channel
-                  metadata:
-                    annotations:
-                      apps.open-cluster-management.io/reconcile-rate: medium
-                    name: githubcom-ibm-garage-mop-rhacm
-                    namespace: ${{ $namespace }}
-                  spec:
-                    pathname: https://github.com/ibm-garage-mop/rhacm.git
-                    type: Git
+            - complianceType: musthave
+              objectDefinition:
+                apiVersion: apps.open-cluster-management.io/v1
+                kind: Subscription
+                metadata:
+                  name: {{ $managedCluster }}-stack-{{ .metadata.labels.stack }}
+                  namespace: {{ $namespace }}
+                  annotations:
+                    apps.open-cluster-management.io/git-branch: main
+                    apps.open-cluster-management.io/git-path: applications/{{ .metadata.labels.stack }}-stack/{{ $managedCluster }}
+                    apps.open-cluster-management.io/reconcile-option: merge
+                spec:
+                  channel: {{ $namespace }}/githubcom-ibm-garage-mop-rhacm
+                  placement:
+                    placementRef:
+                      name: {{ $managedCluster }}
+                      kind: Placement
               {{- end }}
             {{- end }}
           pruneObjectBehavior: None
