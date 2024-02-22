@@ -95,8 +95,8 @@ spec:
                       packageOverrides:
                       - path: metadata
                         value:
-                            labels:
-                              seb: 'true'
+                          labels:
+                            seb: 'true'
                   channel: {{ $namespace }}/githubcom-ibm-garage-mop-rhacm
                   placement:
                     placementRef:
