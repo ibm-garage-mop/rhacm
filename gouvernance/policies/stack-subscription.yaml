@@ -89,6 +89,11 @@ spec:
                     open-cluster-management.io/user-group: b2NwLWFkbWlucyxzeXN0ZW06YXV0aGVudGljYXRlZDpvYXV0aCxzeXN0ZW06YXV0aGVudGljYXRlZA==
                     open-cluster-management.io/user-identity: c2NoYWJyb2xsZXM=
                 spec:
+                  packageOverrides:
+                    - packageName: nmstate
+                      packageOverrides:
+                      - path: metadata.namespace
+                        value: null
                   channel: {{ $namespace }}/githubcom-ibm-garage-mop-rhacm
                   placement:
                     placementRef:
