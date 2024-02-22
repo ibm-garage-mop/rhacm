@@ -9,7 +9,7 @@ metadata:
     app: policies
     app.kubernetes.io/part-of: policies
     apps.open-cluster-management.io/reconcile-rate: medium
-  name: telco
+  name: telco-operators
   namespace: rhacm-policies
 spec:
   description: ""
