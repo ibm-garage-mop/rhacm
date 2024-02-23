@@ -1,0 +1,43 @@
+apiVersion: policy.open-cluster-management.io/v1
+kind: PolicyGenerator
+metadata:
+  name: telco-stack-all
+placementBindingDefaults:
+  name: telco-stack-all
+policyDefaults:
+  namespace: rhacm-policies
+  remediationAction: enforce
+  severity: medium
+  complianceType: "musthave"
+  categories:
+    - "CM Configuration Management"
+  controls:
+    - "CM-2 Baseline Configuration"
+  standards:
+    - "Telco"
+policies:
+  - name: metallb-operator
+    manifests:
+      - path: input-metallb-operator
+    policySets:
+      - telco-stack-all
+  - name: nmstate-operator
+    manifests:
+      - path: input-nmstate-operator
+    policySets:
+      - telco-stack-all
+  - name: sriov-operator
+    manifests:
+      - path: input-sriov-operator
+    policySets:
+      - telco-stack-all
+policySets:
+  - name: telco-stack-all
+    description: Install needed operators for telco-stack
+    placement:
+      labelSelector:
+        matchExpressions:
+          - key: "stack"
+            operator: In
+            values:
+             - "telco"

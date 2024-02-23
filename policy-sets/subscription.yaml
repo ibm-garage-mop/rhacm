@@ -1,0 +1,78 @@
+apiVersion: v1                    
+kind: Namespace
+metadata:
+  name: rhacm-policies                             
+---
+apiVersion: app.k8s.io/v1beta1
+kind: Application
+metadata:
+  name: policy-generator
+  namespace: rhacm-policies
+spec:
+  componentKinds:
+  - group: apps.open-cluster-management.io
+    kind: Subscription
+  descriptor: {}
+  selector:
+    matchExpressions:
+      - key: app
+        operator: In
+        values: 
+          - policy-generator
+---
+apiVersion: apps.open-cluster-management.io/v1
+kind: Channel
+metadata:
+  annotations:
+    apps.open-cluster-management.io/reconcile-rate: medium
+    apps.open-cluster-management.io/webhook-enabled: 'true'
+  name: githubcom-ibm-garage-mop-rhacm
+  namespace: rhacm-policies
+spec:
+  pathname: https://github.com/ibm-garage-mop/rhacm.git
+  type: Git
+---
+apiVersion: apps.open-cluster-management.io/v1
+kind: Subscription
+metadata:
+  annotations:
+    apps.open-cluster-management.io/git-branch: seb
+    apps.open-cluster-management.io/git-path: policy-sets
+    apps.open-cluster-management.io/reconcile-option: merge
+  labels:
+    app: policy-generator
+  name: policy-generator-subscription-1
+  namespace: rhacm-policies
+spec:
+  channel: rhacm-policies/githubcom-ibm-garage-mop-rhacm
+  placement:
+    placementRef:
+      kind: Placement
+      name: local-placement
+---
+apiVersion: cluster.open-cluster-management.io/v1beta1
+kind: Placement
+metadata:
+  labels:
+    app: policy-generator
+  name: local-placement
+  namespace: rhacm-policies
+spec:
+  predicates:
+    - requiredClusterSelector:
+        labelSelector:
+          matchExpressions:
+            - key: 'local-cluster'
+              operator: 'In'
+              values: 
+                - 'true'
+  clusterSets:
+    - global
+---
+apiVersion: cluster.open-cluster-management.io/v1beta2
+kind: ManagedClusterSetBinding
+metadata:
+  namespace: rhacm-policies
+  name: global
+spec:
+  clusterSet: global

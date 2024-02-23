@@ -1,0 +1,54 @@
+apiVersion: policy.open-cluster-management.io/v1
+kind: PolicyGenerator
+metadata:
+  name: policy-generator
+placementBindingDefaults:
+  name: virtualization-target
+policyDefaults:
+  namespace: rhacm-policies
+  remediationAction: enforce
+  severity: medium
+  complianceType: "musthave"
+  categories:
+    - "CM Configuration Management"
+  controls:
+    - "CM-2 Baseline Configuration"
+  standards:
+    - "Telco"
+policies:
+  - name: virtualization-target-metallb-cfg
+    manifests:
+      - path: metallb
+    dependencies:
+      - apiVersion: policy.open-cluster-management.io/v1
+        compliance: Compliant
+        kind: Policy
+        name: metallb-operator
+        namespace: rhacm-policies
+    policySets:
+      - virtualization-target
+  - name: virtualization-target-nmstate-cfg
+    manifests:
+      - path: nmstate
+    dependencies:
+      - apiVersion: policy.open-cluster-management.io/v1
+        compliance: Compliant
+        kind: Policy
+        name: nmstate-operator
+        namespace: rhacm-policies
+    policySets:
+      - virtualization-target
+policySets:
+  - name: virtualization-target
+    description: Configure (telco-stack) Operators for the cluster
+    placement:
+      labelSelector:
+        matchExpressions:
+          - key: "name" 
+            operator: In
+            values:
+            - "virtualization-target"
+          - key: "stack"
+            operator: In
+            values:
+             - "telco"

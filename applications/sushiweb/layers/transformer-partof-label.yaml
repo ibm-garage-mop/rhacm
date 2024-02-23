@@ -1,0 +1,15 @@
+apiVersion: builtin
+kind: ValueAddTransformer
+metadata:
+  name: dirNameAdd
+
+#  Omitting the 'value:' field means that the current
+#  kustomization root directory name will be used as
+#  the value.
+# value:  not specified!
+
+targets:
+- slector:
+  kind: Deployment
+  fieldPath: metadata/labels/app.kubernetes.io\/part-of
+
