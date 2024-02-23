@@ -11,7 +11,7 @@ metadata:
   name: stack-subscription
   namespace: rhacm-policies
 spec:
-  disabled: false
+  disabled: true
   policy-templates:
     - objectDefinition:
         apiVersion: policy.open-cluster-management.io/v1
