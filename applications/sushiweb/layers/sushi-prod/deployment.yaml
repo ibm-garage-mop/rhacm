@@ -3,7 +3,7 @@ apiVersion: apps/v1
 metadata:
   name: sushiweb
 spec:
-  replicas: 3
+  replicas: 2
   template:
     spec:
       containers:
