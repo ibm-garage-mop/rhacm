@@ -16,7 +16,7 @@ policyDefaults:
   standards:
     - "CloudPak"
 policies:
-  - name: metallb-operator
+  - name: cloud-pak-deployer-wizzard
     manifests:
       - path: input-wizzard
     policySets:
