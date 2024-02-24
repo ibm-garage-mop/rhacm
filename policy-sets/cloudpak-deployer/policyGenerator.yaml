@@ -1,0 +1,33 @@
+apiVersion: policy.open-cluster-management.io/v1
+kind: PolicyGenerator
+metadata:
+  name: cloud-pak-deployer-wizzard
+placementBindingDefaults:
+  name: cloud-pak-deployer-wizzard
+policyDefaults:
+  namespace: cloud-pak-deployer
+  remediationAction: enforce
+  severity: medium
+  complianceType: "musthave"
+  categories:
+    - "CM Configuration Management"
+  controls:
+    - "CM-2 Baseline Configuration"
+  standards:
+    - "CloudPak"
+policies:
+  - name: metallb-operator
+    manifests:
+      - path: input-wizzard
+    policySets:
+      - cloud-pak-deployer-wizzard
+policySets:
+  - name: cloud-pak-deployer-wizzard
+    description: Cloudpak deployer Wizzard
+    placement:
+      labelSelector:
+        matchExpressions:
+          - key: "cpdeployer"
+            operator: In
+            values:
+             - "wizzard"
