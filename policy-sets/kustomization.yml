@@ -5,6 +5,7 @@ resources:
   - default
   - telco-stack/all
   - telco-stack/virtualization-target
+  - cloudpak-deployer
 
 #generators:
 #- policyGenerator-virtualization-target.yaml
