@@ -45,8 +45,8 @@ metadata:
   namespace: cloud-pak-deployer
 spec:
   # storageClassName: 'ocs-storagecluster-cephfs'
-  # accessModes:
-  #   - ReadWriteMany
+  accessModes:
+    - ReadWriteOnce
   resources:
     requests:
       storage: 1Gi
@@ -58,8 +58,8 @@ metadata:
   namespace: cloud-pak-deployer
 spec:
   # storageClassName: 'ocs-storagecluster-cephfs'
-  # accessModes:
-  #   - ReadWriteMany
+  accessModes:
+    - ReadWriteOnce
   resources:
     requests:
       storage: 10Gi
