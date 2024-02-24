@@ -103,7 +103,7 @@ spec:
               mountPath: /Data/cpd-status
           command: ['/bin/sh', '-xc']
           args:
-            - mkdir -p /Data/cpd-config/config && /cloud-pak-deployer/cp-deploy.sh env wizard -v
+            - mkdir -p /Data/cpd-config/config && cp /cloud-pak-deployer/sample-configurations/sample-dynamic/config-samples/cp4d-482.yaml /cloud-pak-deployer/sample-configurations/web-ui-base-config/cloud-pak/cp4d.yaml && /cloud-pak-deployer/cp-deploy.sh env wizard -v
       securityContext:
         runAsUser: 0
       serviceAccountName: cloud-pak-deployer-sa
