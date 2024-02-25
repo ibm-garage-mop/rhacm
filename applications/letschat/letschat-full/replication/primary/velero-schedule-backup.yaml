@@ -1,0 +1,11 @@
+apiVersion: velero.io/v1
+kind: Schedule
+metadata:
+  name: letschat-replication
+  namespace: openshift-adp
+spec:
+  schedule: '*/15 * * * * '
+  template:
+    includedNamespaces:
+      - letschat-replication
+    ttl: 1h

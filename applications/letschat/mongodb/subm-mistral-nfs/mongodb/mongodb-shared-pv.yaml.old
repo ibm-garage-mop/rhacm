@@ -1,0 +1,17 @@
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: mongodb-shared-pv
+spec:
+  capacity:
+    storage: 3Gi
+  csi:
+    driver: spectrumscale.csi.ibm.com
+    volumeHandle: >-
+      4191635701703799000;3E27030A:63E66FE3;filesetName=letschat-demo;path=/mnt/remote-mistral-fs1/letschat-demo
+  accessModes:
+    - ReadWriteMany
+  claimRef: null
+  persistentVolumeReclaimPolicy: Delete
+  storageClassName: letschat-rahcm-demo
+  volumeMode: Filesystem

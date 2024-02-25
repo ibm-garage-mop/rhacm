@@ -1,0 +1,14 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: letschat
+spec:
+  template:
+    spec:
+      containers:
+        - name: letschat
+          env:
+            - name: MONGODB_SERVICE_HOST
+              value: mongodb.letschat-rhacm.svc.clusterset.local
+            - name: MONGODB_SERVICE_PORT
+              value: '27017'

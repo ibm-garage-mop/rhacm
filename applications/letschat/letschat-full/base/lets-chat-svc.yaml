@@ -1,0 +1,20 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: letschat
+  name: letschat-svc
+spec:
+  ports:
+  - port: 8080
+    protocol: TCP
+    targetPort: 8080
+    name: http
+  - port: 8443
+    protocol: TCP
+    targetPort: 8443
+    name: https
+  selector:
+    app: letschat
+  type: ClusterIP

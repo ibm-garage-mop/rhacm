@@ -1,0 +1,10 @@
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: mongodb
+  labels:
+    app: letschat-db
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: letschat-rahcm-demo

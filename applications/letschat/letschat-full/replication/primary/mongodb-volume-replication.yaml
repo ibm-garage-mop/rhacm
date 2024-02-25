@@ -1,0 +1,11 @@
+apiVersion: replication.storage.openshift.io/v1alpha1
+kind: VolumeReplication
+metadata:
+  name: mongodb-volumereplication
+spec:
+  volumeReplicationClass: odf-rbd-volumereplicationclass
+  replicationState: primary
+  replicationHandle: demo-replicationhandle
+  dataSource:
+    kind: PersistentVolumeClaim
+    name: mongodb

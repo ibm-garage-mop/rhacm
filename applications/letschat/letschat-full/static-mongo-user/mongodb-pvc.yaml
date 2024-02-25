@@ -1,0 +1,8 @@
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: mongodb
+  labels:
+    app: letschat-db
+spec:
+  storageClassName: san

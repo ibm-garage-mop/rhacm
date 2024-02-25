@@ -1,0 +1,13 @@
+apiVersion: volsync.backube/v1alpha1
+kind: ReplicationDestination
+metadata:
+  name: letschat
+spec:
+  rsync:
+    accessModes:
+      - ReadWriteOnce
+    capacity: 1Gi
+    copyMethod: Snapshot
+    serviceType: ClusterIP
+    storageClassName: san
+    volumeSnapshotClassName: ibm-block-fs7200-snapshot

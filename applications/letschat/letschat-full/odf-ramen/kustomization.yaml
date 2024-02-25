@@ -1,0 +1,20 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+- mongodb-drpc.yaml
+# - velero-restore.yaml
+# - velero-schedule-backup.yaml
+# - mongodb-volume-replication.yaml
+# - mongodb-shared-pv.yaml
+# - serviceaccount.yaml
+# - rolebinding.yaml
+
+bases:
+- ../../base
+
+patchesStrategicMerge:
+- mongodb-pvc.yaml
+# - namespace.yaml
+

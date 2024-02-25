@@ -1,0 +1,18 @@
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: mongodb-shared-pv
+  annotations:
+    pv.kubernetes.io/bound-by-controller: 'yes'
+spec:
+  capacity:
+    storage: 5Gi
+  nfs:
+    server: 10.3.47.111
+    path: /export/demo-rhacm-submariner/mongodb-letschat-shared
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Delete
+  storageClassName: letschat-rahcm-demo
+  volumeMode: Filesystem
+
