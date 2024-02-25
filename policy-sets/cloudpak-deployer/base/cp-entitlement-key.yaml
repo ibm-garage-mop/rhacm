@@ -1,0 +1,10 @@
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: cloud-pak-entitlement-key
+  namespace: cloud-pak-deployer
+type: Opaque
+stringData:
+  cp-entitlement-key: |
+    {{hub fromSecret "cloud-pak-deployer" "cloud-pak-entitlement-key" "schabrolles" hub}}
