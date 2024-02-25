@@ -1,0 +1,17 @@
+---
+global_config:
+  environment_name: mop
+  cloud_platform: existing-ocp
+  env_id: seb
+  confirm_destroy: False
+
+openshift:
+- name: "{{ env_id }}"
+  ocp_version: "4.14"
+  cluster_name: "{{ env_id }}"
+  domain_name: mop.ibm
+  openshift_storage:
+  - storage_name: nfs
+    storage_type: custom
+    ocp_storage_class_block: nfs
+    ocp_storage_class_file: nfs
