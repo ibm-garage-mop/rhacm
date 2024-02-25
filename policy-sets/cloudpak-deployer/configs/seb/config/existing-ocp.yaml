@@ -12,6 +12,6 @@ openshift:
   domain_name: mop.ibm
   openshift_storage:
   - storage_name: nfs
-    storage_type: 
+    storage_type: custom
     ocp_storage_class_block: nfs
     ocp_storage_class_file: nfs
