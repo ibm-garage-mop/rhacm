@@ -24,7 +24,7 @@ policies:
 policySets:
   - name: cloud-pak-deployer-wizzard
     description: |
-      Cloudpak deployer Wizzard.
+      Cloudpak deployer Wizzard.\n
       usage: label [cpdeployer=wizzard]
     placement:
       labelSelector:
