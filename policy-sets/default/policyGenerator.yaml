@@ -29,7 +29,7 @@ policies:
 policySets:
   - name: default
     description: |
-      [all cluster except "local-cluster"].  
+      [all clusters except "local-cluster"].  
       openshift cluster Post-Install.
     placement:
       labelSelector:
