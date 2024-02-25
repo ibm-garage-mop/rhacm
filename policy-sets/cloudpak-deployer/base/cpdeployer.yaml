@@ -38,6 +38,18 @@ subjects:
   name: cloud-pak-deployer-sa
   namespace: cloud-pak-deployer
 ---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: cloud-pak-deployer-status
+  namespace: cloud-pak-deployer
+spec:
+  accessModes:
+  - ReadWriteMany
+  resources:
+    requests:
+      storage: 10Gi
+---
 apiVersion: batch/v1
 kind: Job
 metadata:
@@ -57,7 +69,7 @@ spec:
     spec:
       containers:
       - name: cloud-pak-deployer
-        image: cloud-pak-deployer:latest
+        image: quay.io/cloud-pak-deployer/cloud-pak-deployer:latest
         imagePullPolicy: Always
         terminationMessagePath: /dev/termination-log
         terminationMessagePolicy: File
