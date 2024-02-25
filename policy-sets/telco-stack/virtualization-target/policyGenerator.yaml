@@ -40,7 +40,9 @@ policies:
       - virtualization-target
 policySets:
   - name: virtualization-target
-    description: Configure (telco-stack) Operators for the cluster
+    description: |
+      [label name=virtualization-target].  
+      Configure (telco-stack) Operators for the cluster
     placement:
       labelSelector:
         matchExpressions:
