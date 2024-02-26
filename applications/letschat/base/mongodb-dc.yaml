@@ -1,0 +1,107 @@
+kind: DeploymentConfig
+apiVersion: apps.openshift.io/v1
+metadata:
+  annotations:
+    template.alpha.openshift.io/wait-for-ready: 'true'
+  name: mongodb
+  labels:
+    template: mongodb-persistent-template
+    app: letschat-db
+spec:
+  strategy:
+    type: Recreate
+    recreateParams:
+      timeoutSeconds: 600
+    resources: {}
+    activeDeadlineSeconds: 21600
+  triggers:
+    - type: ImageChange
+      imageChangeParams:
+        automatic: true
+        containerNames:
+          - mongodb
+        from:
+          kind: ImageStreamTag
+          namespace: openshift
+          name: 'mongodb:3.6'
+    - type: ConfigChange
+  replicas: 1
+  revisionHistoryLimit: 10
+  test: false
+  selector:
+    name: mongodb
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        name: mongodb
+    spec:
+      volumes:
+        - name: mongodb-data
+          persistentVolumeClaim:
+            claimName: mongodb
+      containers:
+        - resources:
+            limits:
+              memory: 512Mi
+          readinessProbe:
+            exec:
+              command:
+                - /bin/sh
+                - '-i'
+                - '-c'
+                - >-
+                  mongo 127.0.0.1:27017/$MONGODB_DATABASE -u $MONGODB_USER -p
+                  $MONGODB_PASSWORD --eval="quit()"
+            initialDelaySeconds: 1
+            timeoutSeconds: 1
+            periodSeconds: 1
+            successThreshold: 1
+            failureThreshold: 3
+          terminationMessagePath: /dev/termination-log
+          name: mongodb
+          livenessProbe:
+            tcpSocket:
+              port: 27017
+            initialDelaySeconds: 5
+            timeoutSeconds: 1
+            periodSeconds: 1
+            successThreshold: 1
+            failureThreshold: 3
+          env:
+            - name: MONGODB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: mongodb
+                  key: database-user
+            - name: MONGODB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mongodb
+                  key: database-password
+            - name: MONGODB_ADMIN_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mongodb
+                  key: database-admin-password
+            - name: MONGODB_DATABASE
+              valueFrom:
+                secretKeyRef:
+                  name: mongodb
+                  key: database-name
+          securityContext:
+            capabilities: {}
+            privileged: false
+          ports:
+            - containerPort: 27017
+              protocol: TCP
+          imagePullPolicy: IfNotPresent
+          volumeMounts:
+            - name: mongodb-data
+              mountPath: /var/lib/mongodb/data
+          terminationMessagePolicy: File
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      securityContext: {}
+      schedulerName: default-scheduler

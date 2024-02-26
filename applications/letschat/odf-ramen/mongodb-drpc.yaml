@@ -1,0 +1,22 @@
+apiVersion: ramendr.openshift.io/v1alpha1
+kind: DRPlacementControl
+metadata:
+  name: mongodb-drpc
+  finalizers:
+    - drpc.ramendr.openshift.io/finalizer
+  labels:
+    app: mongodb
+    cluster.open-cluster-management.io/backup: resource
+spec:
+  action: Failover
+  drPolicyRef:
+    name: odr-policy-5m
+  failoverCluster: dr-secondary
+  placementRef:
+    kind: PlacementRule
+    name: busybox-placement
+    namespace: busybox-sample1
+  preferredCluster: dr-primary
+  pvcSelector:
+    matchLabels:
+      app: letschat-db

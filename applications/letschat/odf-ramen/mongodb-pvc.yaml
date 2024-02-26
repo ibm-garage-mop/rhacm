@@ -1,0 +1,6 @@
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: mongodb
+spec:
+  storageClassName: ocs-storagecluster-ceph-rbdmirror

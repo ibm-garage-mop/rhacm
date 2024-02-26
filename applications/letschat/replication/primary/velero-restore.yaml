@@ -1,0 +1,11 @@
+apiVersion: velero.io/v1
+kind: Restore
+metadata:
+  namespace: openshift-adp
+  name: restore
+spec:
+  scheduleName: letschat-replication
+  # includedResources:
+  #   - pv
+  includedNamespaces:
+    - letschat-replication
