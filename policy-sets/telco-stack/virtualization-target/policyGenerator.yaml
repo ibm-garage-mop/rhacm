@@ -38,6 +38,17 @@ policies:
         namespace: rhacm-policies
     policySets:
       - telco-stack-virtualization-target
+  - name: virtualization-target-sriov-cfg
+    manifests:
+      - path: sriov
+    dependencies:
+      - apiVersion: policy.open-cluster-management.io/v1
+        compliance: Compliant
+        kind: Policy
+        name: sriov-operator
+        namespace: rhacm-policies
+    policySets:
+      - telco-stack-virtualization-target      
 policySets:
   - name: telco-stack-virtualization-target
     description: |
