@@ -14,8 +14,8 @@ spec:
     rootDevices:
       - '0000:2f:00.1'
     vendor: '8086'
-  # nodeSelector:
-  #   ran.openshift.io/sriov: ''
+  nodeSelector:
+    ran.openshift.io/sriov: ''
   numVfs: 16
   priority: 99
   resourceName: ens2f1
