@@ -49,12 +49,6 @@ policies:
         namespace: rhacm-policies
     policySets:
       - telco-stack-virtualization-target
-  - name: virtualization-target-test-seb
-    complianceType: "mustnothave"
-    manifests:
-      - path: seb
-    policySets:
-      - telco-stack-virtualization-target
 policySets:
   - name: telco-stack-virtualization-target
     description: |
