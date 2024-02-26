@@ -1,7 +1,6 @@
 apiVersion: sriovnetwork.openshift.io/v1
 kind: SriovNetworkNodePolicy
 metadata:
-  annotations:
   name: test-ens2f1
   namespace: openshift-sriov-network-operator
 spec:
