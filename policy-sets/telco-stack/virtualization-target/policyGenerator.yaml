@@ -49,19 +49,24 @@ policies:
         namespace: rhacm-policies
     policySets:
       - telco-stack-virtualization-target
+  - name: virtualization-target-test-seb
+    manifests:
+      - path: seb
+    policySets:
+      - telco-stack-virtualization-target
 policySets:
   - name: telco-stack-virtualization-target
     description: |
-      [label name=virtualization-target].  
+      [label name=virtualization-target].
       Configure (telco-stack) Operators for the cluster
     placement:
       labelSelector:
         matchExpressions:
-          - key: "name" 
+          - key: "name"
             operator: In
             values:
-            - "virtualization-target"
+              - "virtualization-target"
           - key: "stack"
             operator: In
             values:
-             - "telco"
+               - "telco"
