@@ -1,0 +1,22 @@
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetworkNodePolicy
+metadata:
+  annotations:
+  name: test-ens2f1
+  namespace: openshift-sriov-network-operator
+spec:
+  deviceType: netdevice
+  isRdma: false
+  linkType: eth
+  nicSelector:
+    deviceID: 158b
+    pfNames:
+      - ens2f1
+    rootDevices:
+      - '0000:2f:00.1'
+    vendor: '8086'
+  nodeSelector:
+    ran.openshift.io/sriov: ''
+  numVfs: 16
+  priority: 99
+  resourceName: ens2f1
