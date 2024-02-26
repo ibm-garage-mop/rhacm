@@ -23,6 +23,6 @@ spec:
           { "dst": "0.0.0.0/0" }
          ]
     }
-  networkNamespace: seb
+  networkNamespace: sushiweb
   resourceName: ens2f1
   vlan: 0
