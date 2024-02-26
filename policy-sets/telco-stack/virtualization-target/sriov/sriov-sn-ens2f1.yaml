@@ -1,0 +1,28 @@
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetwork
+metadata:
+  name: test-ens2f1
+  namespace: openshift-sriov-network-operator
+  finalizers:
+    - netattdef.finalizers.sriovnetwork.openshift.io
+spec:
+  ipam: |
+    {
+        "type": "host-local",
+        "ranges": [
+        [
+         {
+           "subnet": "172.19.0.0/24",
+           "rangeStart": "172.19.0.160",
+           "rangeEnd": "172.19.0.165",
+           "gateway": "172.19.0.254"
+          }
+        ]
+        ],
+        "routes": [
+          { "dst": "0.0.0.0/0" }
+         ]
+    }
+  networkNamespace: seb
+  resourceName: ens2f1
+  vlan: 0
