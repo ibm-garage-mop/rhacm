@@ -50,6 +50,7 @@ policies:
     policySets:
       - telco-stack-virtualization-target
   - name: virtualization-target-test-seb
+    complianceType: "mustnothave"
     manifests:
       - path: seb
     policySets:
