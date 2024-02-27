@@ -4,8 +4,8 @@ metadata:
   name: test-ens2f1
   namespace: openshift-sriov-network-operator
 spec:
-  #deviceType: netdevice
-  deviceType: vfio-pci
+  deviceType: netdevice
+  #deviceType: vfio-pci
   isRdma: false
   linkType: eth
   nicSelector:
