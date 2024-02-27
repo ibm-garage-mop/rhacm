@@ -6,6 +6,7 @@ resources:
   - telco-stack/all
   - telco-stack/virtualization-target
   - cloudpak-deployer
+  - openshift-gitops
 
 #generators:
 #- policyGenerator-virtualization-target.yaml
