@@ -5,7 +5,7 @@ metadata:
   namespace: openshift-sriov-network-operator
 spec:
   #deviceType: netdevice
-  deviceType: deviceType
+  deviceType: vfio-pci
   isRdma: false
   linkType: eth
   nicSelector:
