@@ -1,0 +1,35 @@
+apiVersion: policy.open-cluster-management.io/v1
+kind: PolicyGenerator
+metadata:
+  name: openshift-gitops
+placementBindingDefaults:
+  name: openshift-gitops
+policyDefaults:
+  namespace: rhacm-policies
+  remediationAction: enforce
+  severity: medium
+  complianceType: "musthave"
+  categories:
+    - "CM Configuration Management"
+  controls:
+    - "CM-2 Baseline Configuration"
+  standards:
+    - "Operators"
+policies:
+  - name: gitops-operator
+    manifests:
+      - path: input-gitops-operator
+    policySets:
+      - openshift-gitops
+policySets:
+  - name: openshift-gitops
+    description: |
+      [label: name=local-cluster].  
+      Install openshift-gitops on local-cluster
+    placement:
+      labelSelector:
+        matchExpressions:
+          - key: "name"
+            operator: In
+            values:
+             - "local-cluster"
