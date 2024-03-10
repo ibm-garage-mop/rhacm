@@ -44,12 +44,12 @@ data:
         license_service:
           state: disabled
           threads_per_core: 2
-      
+     
       - name: lite
 
-      - name: scheduler 
+      - name: scheduler
         state: installed
-        
+
     #
     # All tested cartridges. To install, change the "state" property to "installed". To uninstall, change the state
     # to "removed" or comment out the entire cartridge. Make sure that the "-" and properties are aligned with the lite
