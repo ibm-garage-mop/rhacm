@@ -1,7 +1,8 @@
-apiVersion: v1                    
+---
+apiVersion: v1
 kind: Namespace
 metadata:
-  name: rhacm-policies                             
+  name: rhacm-policies
 ---
 apiVersion: app.k8s.io/v1beta1
 kind: Application
@@ -64,7 +65,7 @@ spec:
           matchExpressions:
             - key: 'local-cluster'
               operator: 'In'
-              values: 
+              values:
                 - 'true'
   clusterSets:
     - global

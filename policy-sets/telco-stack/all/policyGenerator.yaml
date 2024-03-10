@@ -34,7 +34,7 @@ policies:
 policySets:
   - name: telco-stack-all
     description: |
-      [label: stack=telco].  
+      [label: stack=telco].
       Install needed operators for telco-stack
     placement:
       labelSelector:
