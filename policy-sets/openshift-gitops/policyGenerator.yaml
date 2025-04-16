@@ -24,7 +24,7 @@ policies:
 policySets:
   - name: openshift-gitops
     description: |
-      [label: name=local-cluster].  
+      [label: name=local-cluster].
       Install openshift-gitops on local-cluster
     placement:
       labelSelector:
