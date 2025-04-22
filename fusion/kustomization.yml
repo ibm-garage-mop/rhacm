@@ -2,11 +2,7 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 resources:
-  - default
-  - telco-stack/all
-  - telco-stack/virtualization-target
-  - cloudpak-deployer
-  - openshift-gitops
+  - ../policy-sets/default
 
 #generators:
 #- policyGenerator-virtualization-target.yaml
