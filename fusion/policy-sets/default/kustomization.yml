@@ -1,11 +1,8 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
-resources:
-  - policy-sets/default
-
-#generators:
-#- policyGenerator-virtualization-target.yaml
+generators:
+- policyGenerator.yaml
 
 # labels:
 # - includeSelectors: true

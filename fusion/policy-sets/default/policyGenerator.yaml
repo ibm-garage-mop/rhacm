@@ -1,0 +1,40 @@
+apiVersion: policy.open-cluster-management.io/v1
+kind: PolicyGenerator
+metadata:
+  name: policy-set-default
+placementBindingDefaults:
+  name: policy-set-default
+policyDefaults:
+  namespace: rhacm-policies
+  remediationAction: enforce
+  severity: medium
+  complianceType: "musthave"
+  categories:
+    - "Cluster Post-Install"
+  controls:
+    - "Access Control"
+  standards:
+    - "IBM CE EMEA"
+policies:
+  - name: oauth-htpasswd-admins
+    manifests:
+      - path: input-oauth-htpasswd-admins
+    policySets:
+      - default
+  - name: group-admins
+    manifests:
+      - path: input-group-admins
+    policySets:
+      - default
+policySets:
+  - name: default
+    description: |
+      [all clusters except "local-cluster"].  
+      openshift cluster Post-Install.
+    placement:
+      labelSelector:
+        matchExpressions:
+          - key: "local-cluster"
+            operator: NotIn
+            values:
+             - 'true'
